@@ -9,3 +9,5 @@ aria-current="{{ $active ? 'page' : 'false' }}"
 aria-current="{{ $active ? 'page' : 'false' }}"
 {{ $attributes }} script>{{ $slot }}</button>
 @endif
+
+{{-- Updated --}}

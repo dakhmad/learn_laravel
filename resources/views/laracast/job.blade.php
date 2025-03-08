@@ -1,3 +1,4 @@
+{{-- Updated --}}
 <x-layout>
     <x-slot:heading>
         Job
