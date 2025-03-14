@@ -2,6 +2,7 @@
 // Updated
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
+use App\Models\User;
 
 // Belajar laravel di Laracast YouTube Channel
 Route::get('/', function () {
@@ -9,8 +10,10 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', function () {
+    $jobs = Job::with('employer')->get();
+    
     return view('laracast.jobs', [
-        'jobs' => Job::all(),
+        'jobs' => $jobs,
     ]);
 });
 
@@ -19,6 +22,18 @@ Route::get('/jobs/{id}', function ($id) {
 
     // dd($id);
     return view('laracast.job', ['job' => $job]);
+});
+
+Route::get('/users', function(){
+    return view('laracast.users', [
+        'users' => User::all(),
+    ]);
+});
+
+Route::get('/users/{id}', function($id){
+    $user = User::find($id);
+
+    return view('laracast.user', ['user' => $user]);
 });
 
 Route::get('/contact', function () {
