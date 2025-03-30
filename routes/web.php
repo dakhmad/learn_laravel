@@ -12,6 +12,7 @@ use App\Models\User;
     3. Persingkat dengan Route::view('/alamat-rute', 'view.blade');
     4. Cek Route list di terminal. php artisan route:list --except-vendor
     5. Buat group controller dengan Route::controller(ExpController::class)->group(function(){ kumpulan rute disini });
+    6. Route Resource, jadi kita tidak perlu membuat perutean yang panjang, cukup satu line kode saja
 */
 
 // Cara singkat
@@ -19,15 +20,21 @@ Route::view('/','laracast.home');
 Route::view('/contact', 'laracast.contact');
 
 // Operasi Job
-Route::controller(JobController::class)->group(function () {
-    Route::get('/jobs',  'index');
-    Route::get('/jobs/create',  'create');
-    Route::get('/jobs/{job}',  'show');
-    Route::post('/jobs',  'store');
-    Route::get('/jobs/{job}/edit',  'edit');
-    Route::patch('/jobs/{job}',  'update');
-    Route::delete('/jobs/{job}',  'destroy');
-});
+// Route::controller(JobController::class)->group(function () {
+//     Route::get('/jobs',  'index');
+//     Route::get('/jobs/create',  'create');
+//     Route::get('/jobs/{job}',  'show');
+//     Route::post('/jobs',  'store');
+//     Route::get('/jobs/{job}/edit',  'edit');
+//     Route::patch('/jobs/{job}',  'update');
+//     Route::delete('/jobs/{job}',  'destroy');
+// });
+
+// Route::resource('jobs', JobController::class);
+Route::resource('jobs', JobController::class, [
+    // 'only' => ['index', 'show']
+    'except' => ['destroy']
+]);
 
 // Ini hanya uji coba
 // Route::get('/users', function(){
