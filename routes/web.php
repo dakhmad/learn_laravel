@@ -23,10 +23,8 @@ Route::get('/jobs/create', function() {
 });
 
 // Show job
-Route::get('/jobs/{id}', function ($id) {
-    $job = Job::find($id);
-    
-    // dd($id);
+Route::get('/jobs/{job}', function (Job $job) {
+    // $job = Job::find($id); // cara panjang
     return view('jobs.show', ['job' => $job]);
 });
 
@@ -48,15 +46,15 @@ Route::post('/jobs', function() {
 });
 
 // Edit job
-Route::get('/jobs/{id}/edit', function ($id) {
-    $job = Job::find($id);
+Route::get('/jobs/{job}/edit', function (Job $job) {
+    // $job = Job::find($id); // cara panjang
     
     // dd($id);
     return view('jobs.edit', ['job' => $job]);
 });
 
 // Update job
-Route::patch('/jobs/{id}', function ($id) {
+Route::patch('/jobs/{job}', function (Job $job) {
     // validate
     request()->validate([
         'title' => ['required', 'min:3'],
@@ -66,7 +64,7 @@ Route::patch('/jobs/{id}', function ($id) {
     // authorize (On hold...)
 
     // update the job
-    $job = Job::findOrFail($id);
+    // $job = Job::findOrFail($id);
     
     // and persist
     // // cara sama
@@ -85,7 +83,7 @@ Route::patch('/jobs/{id}', function ($id) {
 });
 
 // Destroy job
-Route::delete('/jobs/{id}', function ($id) {
+Route::delete('/jobs/{job}', function (Job $job) {
     // authorize (On hold...)
     // delete the job
 
@@ -94,7 +92,8 @@ Route::delete('/jobs/{id}', function ($id) {
     // $job->delete();
 
     // Alternative tercepat
-    $job = Job::findOrFail($id)->delete();
+    // $job = Job::findOrFail($id)->delete();
+    $job->delete();
 
     // redirect
     return redirect('/jobs');
